@@ -2,6 +2,7 @@ package datos;
 
 import modelos.Rol;
 import modelos.Tipoatencion;
+import modelos.cliente;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,5 +54,27 @@ public class Accesodatos {
             e.printStackTrace(System.out);
         }
         return tipoatencionlist;
+    }
+    /**
+     * Creates a new cliente
+     * @param cliente cliente to create
+     */
+    public cliente crearcliente(cliente cliente){
+        try{
+            final String SQL = "INSERT INTO cliente (id_cliente, nombre, apellido) VALUES (?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, cliente.getId_cliente());
+            ps.setString(2, cliente.getNombre());
+            ps.setString(3, cliente.getApellido());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                cliente.setId_cliente(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
     }
 }
