@@ -46,6 +46,7 @@ public class Accesodatos {
                 Tipoatencion tipoatencion = new Tipoatencion();
                 tipoatencion.setId_tipoatencion(rs.getInt("id_tipoatencion"));
                 tipoatencion.setNombre(rs.getString("nombre"));
+                tipoatencionlist.add(tipoatencion);
             }
 
         }catch (SQLException e){
