@@ -1,0 +1,41 @@
+package modelos;
+
+public class usuario {
+    private int id_usuario;
+    private String correo;
+    private String clave;
+    public usuario(){}
+
+    public usuario(int id_usuario, String correo, String clave){
+    this.id_usuario = id_usuario;
+    this.correo = correo;
+    this.clave = clave;
+    }
+    public usuario(String correo,String clave){
+        this.correo = correo;
+        this.clave = clave;
+    }
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }}
+
