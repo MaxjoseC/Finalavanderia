@@ -1,6 +1,7 @@
 package datos;
 
 import modelos.Rol;
+import modelos.Tipoatencion;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,12 +16,11 @@ public class Accesodatos {
         conexion = new Conexion();
     }
     public List<Rol> obtenerRoles(){
+        List<Rol> roles = new ArrayList<Rol>();
         try{
             final String SQL = "SELECT * FROM rol";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-
-            List<Rol> roles = new ArrayList<Rol>();
 
             while (rs.next()){
                 Rol rol = new Rol();
@@ -33,5 +33,24 @@ public class Accesodatos {
         }catch (SQLException e){
             e.printStackTrace(System.out);
         }
+        return roles;
+    }
+    public List<Tipoatencion> Tipoatencion(){
+        List<Tipoatencion> tipoatencionlist = new ArrayList<Tipoatencion>();
+        try{
+            final String SQL = "SELECT * FROM tipoatencion";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                Tipoatencion tipoatencion = new Tipoatencion();
+                tipoatencion.setId_tipoatencion(rs.getInt("id_tipoatencion"));
+                tipoatencion.setNombre(rs.getString("nombre"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return tipoatencionlist;
     }
 }
