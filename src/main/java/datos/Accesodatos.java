@@ -77,4 +77,73 @@ public class Accesodatos {
         }
         return null;
     }
+    /**
+     * obtener cliente por el ID.
+     * @param id_cliente cliente.
+     * @return cliente cliente encontrado.
+     */
+    public cliente getCliente_id(int id_cliente){
+        try{
+            final String SQL = "SELECT * FROM cliente WHERE id_cliente =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_cliente);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                cliente cliente = new cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                return cliente;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    /**
+     * obtener un cliente a partir de un nombre o apellido
+     * @param nombre OR apellido del cliente
+     * @return cliente cliente encontrado
+     */
+    public cliente getClientedatos(String nombre, String apellido){
+        try{
+            final String SQL = "SELECT * FROM cliente WHERE nombre =? OR apellido =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                cliente cliente = new cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                return cliente;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    /**
+     * Actualiza un cliente
+     * @param cliente cliente a actualizar
+     * @return true si se actualiza un cliente, false en caso contrario
+     */
+    public boolean actualizarCliente(cliente cliente){
+        try{
+            final String SQL = "UPDATE cliente SET nombre =?, apellido =? WHERE id_cliente =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setString(1, cliente.getNombre());
+            ps.setString(2, cliente.getApellido());
+            ps.setInt(3, cliente.getId_cliente());
+            ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
 }
