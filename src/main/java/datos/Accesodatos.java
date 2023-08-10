@@ -3,6 +3,7 @@ package datos;
 import modelos.Rol;
 import modelos.Tipoatencion;
 import modelos.cliente;
+import modelos.usuario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,10 +56,7 @@ public class Accesodatos {
         }
         return tipoatencionlist;
     }
-    /**
-     * Creates a new cliente
-     * @param cliente cliente to create
-     */
+
     public cliente crearcliente(cliente cliente){
         try{
             final String SQL = "INSERT INTO cliente (id_cliente, nombre, apellido) VALUES (?,?,?)";
@@ -77,11 +75,7 @@ public class Accesodatos {
         }
         return null;
     }
-    /**
-     * obtener cliente por el ID.
-     * @param id_cliente cliente.
-     * @return cliente cliente encontrado.
-     */
+
     public cliente getCliente_id(int id_cliente){
         try{
             final String SQL = "SELECT * FROM cliente WHERE id_cliente =?";
@@ -102,11 +96,7 @@ public class Accesodatos {
         }
         return null;
     }
-    /**
-     * obtener un cliente a partir de un nombre o apellido
-     * @param nombre OR apellido del cliente
-     * @return cliente cliente encontrado
-     */
+
     public cliente getClientedatos(String nombre, String apellido){
         try{
             final String SQL = "SELECT * FROM cliente WHERE nombre =? OR apellido =?";
@@ -128,11 +118,7 @@ public class Accesodatos {
         }
         return null;
     }
-    /**
-     * Actualiza un cliente
-     * @param cliente cliente a actualizar
-     * @return true si se actualiza un cliente, false en caso contrario
-     */
+
     public boolean actualizarCliente(cliente cliente){
         try{
             final String SQL = "UPDATE cliente SET nombre =?, apellido =? WHERE id_cliente =?";
@@ -145,5 +131,45 @@ public class Accesodatos {
             e.printStackTrace(System.out);
         }
         return false;
+    }
+    /**
+     * Eliminar un cliente a partir del nombre y apellido
+     * @param nombre,apellido del cliente
+     * @return true si borra el cliente, faalse en el caso contrario
+     */
+    public boolean borrarCliente(String nombre, String apellido){
+        try{
+            final String SQL = "DELETE FROM cliente WHERE nombre =? OR apellido =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+    /**
+     * crear un nuevo usuario
+     * @param usuario usario a crear
+     * @return usuario usuario creado
+     */
+    public usuario crearUsuario(usuario usuario){
+        try{
+            final String SQL = "INSERT INTO usuario (id_usuario, correo, clave) VALUES (?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, usuario.getId_usuario());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getClave());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                usuario.setId_usuario(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
     }
 }
