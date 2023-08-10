@@ -172,22 +172,26 @@ public class Accesodatos {
         }
         return null;
     }
+
     /**
-     * Obtener usuario por id_usuario
-     * @return usuario
+     * inicia sesion a partir de los credenciales de un usuario
+     * @param correo correo del usuario
+     * @param clave del usuario
      */
-    public usuario getUsuario_id(int id_usuario){
+    public usuario iniciarSesion(String correo, String clave){
         try{
-            final String SQL = "SELECT * FROM usuario WHERE id_usuario =?";
+            final String SQL = "SELECT * FROM usuario WHERE correo =? AND clave =?";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
-            ps.setInt(1, id_usuario);
+            ps.setString(1, correo);
+            ps.setString(2, clave);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
                 usuario usuario = new usuario();
                 usuario.setId_usuario(rs.getInt("id_usuario"));
-                usuario.setCorreo(rs.getString("correo"));
-                usuario.setClave(rs.getString("clave"));
+                usuario.setCorreo(correo);
+                usuario.setClave(clave);
+                usuario.setId_empleado(rs.getInt("id_empleado"));
                 return usuario;
             }
 
@@ -196,6 +200,6 @@ public class Accesodatos {
         }
         return null;
     }
-    
+    /**
 }
 
