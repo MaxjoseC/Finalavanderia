@@ -126,7 +126,7 @@ public class Accesodatos {
             ps.setString(1, cliente.getNombre());
             ps.setString(2, cliente.getApellido());
             ps.setInt(3, cliente.getId_cliente());
-            ps.executeUpdate();
+            return ps.executeUpdate() > 0;
         }catch (SQLException e){
             e.printStackTrace(System.out);
         }
@@ -135,7 +135,7 @@ public class Accesodatos {
     /**
      * Eliminar un cliente a partir del nombre y apellido
      * @param nombre,apellido del cliente
-     * @return true si borra el cliente, faalse en el caso contrario
+     * @return true si borra el cliente, false en el caso contrario
      */
     public boolean borrarCliente(String nombre, String apellido){
         try{
@@ -143,7 +143,9 @@ public class Accesodatos {
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
             ps.setString(1, nombre);
             ps.setString(2, apellido);
-            ps.executeUpdate();
+
+            return ps.executeUpdate() > 0;
+
         }catch (SQLException e){
             e.printStackTrace(System.out);
         }
@@ -201,5 +203,22 @@ public class Accesodatos {
         return null;
     }
     /**
+     * borrar usuario por correo
+     * @param correo correo del usuario
+     * @return true si lo eliminó correctamente, false de lo contrario
+     */
+    public boolean borrarUsuario(String correo){
+        try{
+            final String SQL = "DELETE FROM usuario WHERE correo =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setString(1, correo);
+
+            return ps.executeUpdate() > 0;
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+    
 }
 
