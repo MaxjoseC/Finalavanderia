@@ -1,9 +1,6 @@
 package datos;
 
-import modelos.Rol;
-import modelos.Tipoatencion;
-import modelos.cliente;
-import modelos.usuario;
+import modelos.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -219,6 +216,28 @@ public class Accesodatos {
         }
         return false;
     }
-    
+    /** crear nuevo empleado.
+     * @param empleado empleado a crear.
+     * @return empleado empleado creado.
+     */
+    public empleado crearEmpleado(empleado empleado){
+        try{
+            final String SQL = "INSERT INTO empleado (nombre, apellido,sueldo, id_rol) VALUES (?,?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, empleado.getNombre());
+            ps.setString(2, empleado.getApellido());
+            ps.setDouble(3, empleado.getSueldo());
+            ps.setInt(4, empleado.getId_rol());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                empleado.setId_empleado(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 }
 
