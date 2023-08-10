@@ -347,6 +347,33 @@ public class Accesodatos {
         }
         return atenciones;
     }
+    /**
+     * listar atencion a partir del id
+     * @param id_Tipoatencion id del servicio.
+     * @return List<atencion> lista de atenciones.
+     */
+    public List<atencion> listatencionTipo(int id_Tipoatencion){
+        List<atencion> atenciones1 = new ArrayList<>();
+        try{
+            final String SQL = "SELECT * FROM atencion WHERE id_Tipoatencion =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_Tipoatencion);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                atencion atencion = new atencion();
+                atencion.setId_atencion(rs.getInt("id_atencion"));
+                atencion.setCantidad(rs.getInt("cantidad"));
+                atencion.setPrecio(rs.getDouble("precio"));
+                atencion.setId_Tipoatencion(rs.getInt("id_tipoatencion"));
+                atencion.setId_servicio(rs.getInt("id_servicio"));
+                atenciones1.add(atencion);
+            }
+        }catch (Exception e){
+            e.printStackTrace(System.out);
+        }
+        return atenciones1;
+    }
     
 
 }
