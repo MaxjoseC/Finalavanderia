@@ -156,11 +156,11 @@ public class Accesodatos {
      */
     public usuario crearUsuario(usuario usuario){
         try{
-            final String SQL = "INSERT INTO usuario (id_usuario, correo, clave) VALUES (?,?,?)";
-            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
-            ps.setInt(1, usuario.getId_usuario());
-            ps.setString(2, usuario.getCorreo());
-            ps.setString(3, usuario.getClave());
+            final String SQL = "INSERT INTO usuario (correo, clave, id_empleado) VALUES (?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, usuario.getCorreo());
+            ps.setString(2, usuario.getClave());
+            ps.setInt(3, usuario.getId_empleado());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -172,4 +172,30 @@ public class Accesodatos {
         }
         return null;
     }
+    /**
+     * Obtener usuario por id_usuario
+     * @return usuario
+     */
+    public usuario getUsuario_id(int id_usuario){
+        try{
+            final String SQL = "SELECT * FROM usuario WHERE id_usuario =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_usuario);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                usuario usuario = new usuario();
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setCorreo(rs.getString("correo"));
+                usuario.setClave(rs.getString("clave"));
+                return usuario;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    
 }
+
