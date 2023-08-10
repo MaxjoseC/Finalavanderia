@@ -303,12 +303,12 @@ public class Accesodatos {
     }
     public atencion crearatencion(atencion atencion){
         try{
-            final String SQL = "INSERT INTO atencion (fecha, hora, id_cliente, id_empleado) VALUES (?,?,?,?)";
+            final String SQL = "INSERT INTO atencion (cantidad, precio, id_tipoatencion, id_servicio) VALUES (?,?,?,?)";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setString(1, atencion.getFecha());
-            ps.setString(2, atencion.getHora());
-            ps.setInt(3, atencion.getId_cliente());
-            ps.setInt(4, atencion.getId_empleado());
+            ps.setInt(1, atencion.getCantidad());
+            ps.setDouble(2, atencion.getPrecio());
+            ps.setInt(3, atencion.getId_Tipoatencion());
+            ps.setInt(4, atencion.getId_servicio());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -319,7 +319,35 @@ public class Accesodatos {
             e.printStackTrace(System.out);
         }
         return null;
-        
     }
+    /**
+     * listar atencion a partir del id
+     * @param id_servicio id del servicio.
+     * @return List<atencion> lista de atenciones.
+     */
+    public List<atencion> listaratencion(int id_servicio){
+        List<atencion> atenciones = new ArrayList<>();
+        try {
+            final String SQL = "SELECT * FROM atencion WHERE id_servicio =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_servicio);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                atencion atencion = new atencion();
+                atencion.setId_atencion(rs.getInt("id_atencion"));
+                atencion.setCantidad(rs.getInt("cantidad"));
+                atencion.setPrecio(rs.getDouble("precio"));
+                atencion.setId_Tipoatencion(rs.getInt("id_tipoatencion"));
+                atencion.setId_servicio(rs.getInt("id_servicio"));
+                atenciones.add(atencion);
+            }
+        }catch (Exception e){
+            e.printStackTrace(System.out);
+        }
+        return atenciones;
+    }
+    
+
 }
 
