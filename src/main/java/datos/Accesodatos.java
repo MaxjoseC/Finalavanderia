@@ -301,6 +301,25 @@ public class Accesodatos {
         }
         return false;
     }
+    public atencion crearatencion(atencion atencion){
+        try{
+            final String SQL = "INSERT INTO atencion (fecha, hora, id_cliente, id_empleado) VALUES (?,?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, atencion.getFecha());
+            ps.setString(2, atencion.getHora());
+            ps.setInt(3, atencion.getId_cliente());
+            ps.setInt(4, atencion.getId_empleado());
+            ps.executeUpdate();
 
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                atencion.setId_atencion(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+        
+    }
 }
 
