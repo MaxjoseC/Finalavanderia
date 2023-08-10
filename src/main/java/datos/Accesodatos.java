@@ -5,6 +5,7 @@ import modelos.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -374,7 +375,31 @@ public class Accesodatos {
         }
         return atenciones1;
     }
-    
+    /**
+     * crear un nuevo servicio
+     * @param servicio servicio a crear nuevo
+     * @return servicio servicio creado
+     */
+    public servicio crearServicio(servicio servicio){
+        try{
+            final String SQL = "INSERT INTO servicio (descripcion, fechaHoraRecepcion,fechaHoraEntrega, id_cliente,id_empleado) VALUES (?,DEFAULT,?,?,?,?)";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, servicio.getDescripcion());
+            ps.setTimestamp(2, Timestamp.valueOf(servicio.getFechaHoraEntrega()));
+            ps.setInt(3, servicio.getId_cliente());
+            ps.setInt(4, servicio.getId_empleado());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                servicio.setId_servicio(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    /**
 
 }
 
