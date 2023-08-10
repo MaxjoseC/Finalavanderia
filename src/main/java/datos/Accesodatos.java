@@ -416,8 +416,8 @@ public class Accesodatos {
                 servicio servicio = new servicio();
                 servicio.setId_servicio(rs.getInt("id_servicio"));
                 servicio.setDescripcion(rs.getString("descripcion"));
-                servicio.setFechaHoraRecepcion(rs.getTimestamp("fechaHoraRecepcion"));
-                servicio.setFechaHoraEntrega(rs.getTimestamp("fechaHoraEntrega"));
+                servicio.setFechaHoraRecepcion(rs.getTimestamp("fechaHoraRecepcion").toLocalDateTime());
+                servicio.setFechaHoraEntrega(rs.getTimestamp("fechaHoraEntrega").toLocalDateTime());
                 servicio.setId_cliente(rs.getInt("id_cliente"));
                 servicio.setId_empleado(rs.getInt("id_empleado"));
                 servicios.add(servicio);
@@ -428,7 +428,34 @@ public class Accesodatos {
     return servicios;
 
     }
-    
+    /**
+     * listar servicios a partir del ID de un empleado
+     * @param id_empleado del cliente
+     * @return List<servicio> Lista de servicio
+     */
+    public List<servicio> listarServiciosEmpleado(int id_empleado){
+        List<servicio> servicios1 = new ArrayList<>();
+        try {
+            final String SQL = "SELECT * FROM servicio WHERE id_empleado =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_empleado);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                servicio servicio = new servicio();
+                servicio.setId_servicio(rs.getInt("id_servicio"));
+                servicio.setDescripcion(rs.getString("descripcion"));
+                servicio.setFechaHoraRecepcion(rs.getTimestamp("fechaHoraRecepcion").toLocalDateTime());
+                servicio.setFechaHoraEntrega(rs.getTimestamp("fechaHoraEntrega").toLocalDateTime());
+                servicio.setId_cliente(rs.getInt("id_cliente"));
+                servicio.setId_empleado(rs.getInt("id_empleado"));
+                servicios1.add(servicio);
+            }
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return servicios1;
+    }
 
 }
 
