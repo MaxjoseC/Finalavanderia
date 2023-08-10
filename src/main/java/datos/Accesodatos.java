@@ -258,5 +258,49 @@ public class Accesodatos {
         }
         return false;
     }
+    /**
+     * recuperar todos los empleados en una List.
+     * @return List<empleado> Lista de empleado.
+     */
+    public List<empleado> obtenerempleados() {
+        List<empleado> empleados = new ArrayList<>();
+        try{
+            final String SQL = "SELECT * FROM empleado";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                empleado empleado = new empleado();
+                empleado.setId_empleado(rs.getInt("id_empleado"));
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
+                empleado.setSueldo(rs.getDouble("sueldo"));
+                empleado.setId_rol(rs.getInt("id_rol"));
+                empleados.add(empleado);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return empleados;
+    }
+    /**
+     * Elimina un empleado a partir de su Id_empleado.
+     * @param id_empleado empleado a eliminar.
+     * @return true si el empleado fue eliminado correctamente, false de lo contrario.
+     */
+    public boolean borrarEmpleado(int id_empleado){
+        try{
+            final String SQL = "DELETE FROM empleado WHERE id_empleado =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_empleado);
+
+            return ps.executeUpdate() > 0;
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return false;
+    }
+
 }
 
