@@ -5,7 +5,6 @@
   <version>1.0.0</version>
   <name>Lavanderia Gestor</name>
   <description>Gestor de una Lavanderia</description>
-  <dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>mysql</groupId>
@@ -23,9 +22,15 @@
       <artifactId>jgoodies-forms</artifactId>
       <version>1.8.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.7</version>
+    </dependency>
+
 
   </dependencies>
-  </dependencyManagement>
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>

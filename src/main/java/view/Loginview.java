@@ -1,13 +1,15 @@
 package view;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Loginview extends JInternalFrame {
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField txtcorreo;
+	private JPasswordField txtclave;
 
 	/**
 	 * Launch the application.
@@ -43,27 +45,37 @@ public class Loginview extends JInternalFrame {
 		lblNewLabel.setBounds(86, 24, 63, 28);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(37, 63, 167, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtcorreo = new JTextField();
+		txtcorreo.setBounds(37, 63, 167, 20);
+		panel.add(txtcorreo);
+		txtcorreo.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contraseña");
 		lblContrasea.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblContrasea.setBounds(72, 94, 92, 28);
 		panel.add(lblContrasea);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(39, 133, 165, 20);
-		panel.add(passwordField);
+		txtclave = new JPasswordField();
+		txtclave.setBounds(39, 133, 165, 20);
+		panel.add(txtclave);
 		
-		JButton btnNewButton = new JButton("Iniciar sesion");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btninicio = new JButton("Iniciar sesion");
+		btninicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String correo = txtcorreo.getText();
+                String clave = new String(txtclave.getPassword());
+
+				EmailValidator emailValidator = EmailValidator.getInstance();
+				if (!emailValidator.isValid(correo)) {
+					JOptionPane.showMessageDialog(Loginview.this, "Correo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+
 			}
 		});
-		btnNewButton.setBounds(59, 166, 125, 28);
-		panel.add(btnNewButton);
+		btninicio.setBounds(59, 166, 125, 28);
+		panel.add(btninicio);
 
 	}
 }
