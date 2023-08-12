@@ -31,7 +31,7 @@ public class Loginview extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Loginview() {
+	public Loginview(GestorLavGui gestorLavGui) {
 		setClosable(true);
 		setTitle("Login");
 		setBounds(100, 100, 273, 253);
@@ -79,7 +79,7 @@ public class Loginview extends JInternalFrame {
 					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}
-
+				GestorLavGui.iniciarSesion(correo,clave)
 
 
 

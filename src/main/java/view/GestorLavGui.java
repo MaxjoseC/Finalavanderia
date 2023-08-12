@@ -57,7 +57,7 @@ public class GestorLavGui {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Iniciar Sesion");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Loginview login = new Loginview();
+				Loginview login = new Loginview(GestorLavGui.this);
 				desktopPane.add(login);
 				login.setVisible(true);
 			}
