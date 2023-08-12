@@ -40,6 +40,7 @@ public class EmpleadocrearFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public EmpleadocrearFrame(GestorLavGui gestorLavGui) {
+		setClosable(true);
 		this.gestorLavGui = gestorLavGui;
 
 		setTitle("Creación empleados");

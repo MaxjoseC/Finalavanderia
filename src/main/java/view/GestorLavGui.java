@@ -82,6 +82,16 @@ public class GestorLavGui {
                 }
 			}
 		});
+		
+		JMenuItem MnIusuario = new JMenuItem("Crear nuevo empleado");
+		MnIusuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmpleadocrearFrame empleadocrearFrame = new EmpleadocrearFrame(GestorLavGui.this);
+				desktopPane.add(empleadocrearFrame);
+				empleadocrearFrame.setVisible(true);
+			}
+		});
+		mnNewMenu.add(MnIusuario);
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		JMenu Empleadomnu = new JMenu("Empleado");
