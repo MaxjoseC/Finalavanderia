@@ -56,19 +56,19 @@ public class Loginview extends JInternalFrame {
 				// validar password character
 				// minimum lenght 8 characters
 				final String PASSWORD_PATTERN =
-						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{4,20}$";
 				if (!clave.matches(PASSWORD_PATTERN)){
 					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}
-				usuario usarioo = GestorLavGui.iniciarSesion(correo,clave);
+				usuario usuario = gestorLavGui.iniciarSesion(correo, clave);
 
-				if(usarioo == null){
+				if(usuario == null){
 					JOptionPane.showMessageDialog(Loginview.this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}
 				//Mensage de bienvenido
-				JOptionPane.showMessageDialog(Loginview.this, "Bienvenido " + usarioo.getCorreo(), "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(Loginview.this, "Bienvenido " + usuario.getCorreo(), "Información", JOptionPane.INFORMATION_MESSAGE);
 				setVisible(false);
 				gestorLavGui.mostrarMenus(true);
 

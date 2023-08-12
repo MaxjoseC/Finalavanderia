@@ -3,10 +3,10 @@ package view;
 import modelos.GestorLav;
 import modelos.usuario;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -14,7 +14,7 @@ public class GestorLavGui {
 
 	private JFrame frmGestorLavanderia;
 	private JMenu Empleadomnu;
-	private static GestorLav gestorLav;
+	private  GestorLav gestorLav;
 
 	/**
 	 * Launch the application.
@@ -88,7 +88,7 @@ public class GestorLavGui {
 		JMenuItem CrearempleadomenuI = new JMenuItem("Crear");
 		Empleadomnu.add(CrearempleadomenuI);
 	}
-	public static usuario iniciarSesion(String correo, String clave) {
+	public usuario iniciarSesion(String correo, String clave) {
 		return gestorLav.iniciarSesion(correo, clave);
 
 	}
