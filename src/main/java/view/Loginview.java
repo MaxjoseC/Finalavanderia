@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 public class Loginview extends JInternalFrame {
 	private JTextField txtcorreo;
@@ -70,6 +71,16 @@ public class Loginview extends JInternalFrame {
 					JOptionPane.showMessageDialog(Loginview.this, "Correo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+				// validar password character
+				// minimum lenght 8 characters
+				final String PASSWORD_PATTERN =
+						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+				if (!clave.matches(PASSWORD_PATTERN)){
+					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+				}
+
+
 
 
 			}
