@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class GestorLavGui {
 
 	private JFrame frmGestorLavanderia;
+	private JMenu Empleadomnu;
 	private static GestorLav gestorLav;
 
 	/**
@@ -80,9 +81,19 @@ public class GestorLavGui {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenu Empleadomnu = new JMenu("Empleado");
+		menuBar.add(Empleadomnu);
+		
+		JMenuItem CrearempleadomenuI = new JMenuItem("Crear");
+		Empleadomnu.add(CrearempleadomenuI);
 	}
 	public static usuario iniciarSesion(String correo, String clave) {
 		return gestorLav.iniciarSesion(correo, clave);
 
+	}
+
+	public void mostrarMenus(boolean b) {
+		Empleadomnu.setEnabled(true);
 	}
 }

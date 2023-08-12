@@ -70,6 +70,7 @@ public class Loginview extends JInternalFrame {
 				//Mensage de bienvenido
 				JOptionPane.showMessageDialog(Loginview.this, "Bienvenido " + usarioo.getCorreo(), "Información", JOptionPane.INFORMATION_MESSAGE);
 				setVisible(false);
+				gestorLavGui.mostrarMenus(true);
 
 			}
 		});
