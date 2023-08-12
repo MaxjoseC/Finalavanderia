@@ -1,5 +1,6 @@
 package view;
 
+import Utilidades.Utilities;
 import modelos.usuario;
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -48,16 +49,12 @@ public class Loginview extends JInternalFrame {
 				String correo = txtcorreo.getText();
                 String clave = new String(txtclave.getPassword());
 
-				EmailValidator emailValidator = EmailValidator.getInstance();
-				if (!emailValidator.isValid(correo)) {
+
+				if (Utilities.validarEmail(correo)){
 					JOptionPane.showMessageDialog(Loginview.this, "Correo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				// validar password character
-				// minimum lenght 8 characters
-				final String PASSWORD_PATTERN =
-						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{4,20}$";
-				if (!clave.matches(PASSWORD_PATTERN)){
+				if (Utilities.validarPassword(clave)){
 					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}

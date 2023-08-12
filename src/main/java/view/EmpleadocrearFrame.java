@@ -118,6 +118,13 @@ public class EmpleadocrearFrame extends JInternalFrame {
 		JButton btncrearEmpleado = new JButton("Crear");
 		btncrearEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nombre = txtNombre.getText();
+                String apellido = txtApellido.getText();
+                String sueldo = fielsueldo.getText();
+				String rol = (String) Rolescombo.getSelectedItem();
+                String correo = txtcorreocrear.getText();
+                String pass = new String(passcrearEmple.getPassword());
+
 			}
 		});
 		empleadopanel.add(btncrearEmpleado, "6, 16");
