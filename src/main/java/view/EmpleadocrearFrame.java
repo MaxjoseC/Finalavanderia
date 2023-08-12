@@ -8,6 +8,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.Rol;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -15,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class EmpleadocrearFrame extends JInternalFrame {
 
@@ -27,6 +30,7 @@ public class EmpleadocrearFrame extends JInternalFrame {
 	private JTextField fielsueldo;
 	private JTextField txtcorreocrear;
 	private JPasswordField passcrearEmple;
+	GestorLavGui gestorLavGui;
 
 	/**
 	 * Launch the application.
@@ -35,7 +39,9 @@ public class EmpleadocrearFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EmpleadocrearFrame() {
+	public EmpleadocrearFrame(GestorLavGui gestorLavGui) {
+		this.gestorLavGui = gestorLavGui;
+
 		setTitle("Creación empleados");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -114,7 +120,15 @@ public class EmpleadocrearFrame extends JInternalFrame {
 			}
 		});
 		empleadopanel.add(btncrearEmpleado, "6, 16");
+		cargarRoles(Rolescombo);
 
+	}
+
+	private void cargarRoles(JComboBox rolescombo) {
+		List<Rol> roles = gestorLavGui.getRoles();
+		for(Rol rol : roles) {
+			rolescombo.addItem(rol.getDescripcion());
+		}
 	}
 
 }

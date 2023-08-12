@@ -1,6 +1,7 @@
 package view;
 
 import modelos.GestorLav;
+import modelos.Rol;
 import modelos.usuario;
 
 
@@ -9,6 +10,7 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class GestorLavGui {
 
@@ -95,5 +97,9 @@ public class GestorLavGui {
 
 	public void mostrarMenus(boolean b) {
 		Empleadomnu.setEnabled(true);
+	}
+
+	public List<Rol> getRoles() {
+		return gestorLav.getRolList();
 	}
 }
