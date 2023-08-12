@@ -1,5 +1,8 @@
 package view;
 
+import modelos.GestorLav;
+import modelos.usuario;
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
@@ -10,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class GestorLavGui {
 
 	private JFrame frmGestorLavanderia;
+	private static GestorLav gestorLav;
 
 	/**
 	 * Launch the application.
@@ -32,6 +36,7 @@ public class GestorLavGui {
 	 */
 	public GestorLavGui() {
 		initialize();
+		gestorLav = new GestorLav();
 	}
 
 	/**
@@ -75,5 +80,9 @@ public class GestorLavGui {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
+	}
+	public static usuario iniciarSesion(String correo, String clave) {
+		return gestorLav.iniciarSesion(correo, clave);
+
 	}
 }

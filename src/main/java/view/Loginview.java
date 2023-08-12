@@ -1,5 +1,6 @@
 package view;
 
+import modelos.usuario;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import javax.swing.*;
@@ -12,25 +13,6 @@ public class Loginview extends JInternalFrame {
 	private JTextField txtcorreo;
 	private JPasswordField txtclave;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Loginview frame = new Loginview();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Loginview(GestorLavGui gestorLavGui) {
 		setClosable(true);
 		setTitle("Login");
@@ -79,9 +61,15 @@ public class Loginview extends JInternalFrame {
 					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}
-				GestorLavGui.iniciarSesion(correo,clave)
+				usuario usarioo = GestorLavGui.iniciarSesion(correo,clave);
 
-
+				if(usarioo == null){
+					JOptionPane.showMessageDialog(Loginview.this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+				}
+				//Mensage de bienvenido
+				JOptionPane.showMessageDialog(Loginview.this, "Bienvenido " + usarioo.getCorreo(), "Información", JOptionPane.INFORMATION_MESSAGE);
+				setVisible(false);
 
 			}
 		});
