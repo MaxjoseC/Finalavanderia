@@ -175,13 +175,37 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				usuario1.setClave(pass);
 
 				empleado1 = gestorLavGui.crearEmpleado(empleado1);
+				if (empleado1 == null) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "No se pudo crear el empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+				}
 
+                usuario1.setId_empleado(empleado1.getId_empleado());
+				usuario1 = gestorLavGui.crearUsuario(usuario1);
 
+				if (usuario1 == null) {
+                    JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "No se pudo crear el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+                    if(!gestorLavGui.brorrarEmpleado(empleado1.getId_empleado())){
+						JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "No se pudo borrar el empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					return;
+                }
+
+				JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Empleado creado correctamente.", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+				limpiarCampos();
 			}
 		});
 		empleadopanel.add(btncrearEmpleado, "6, 16");
 		cargarRoles(Rolescombo);
 
+	}
+
+	private void limpiarCampos() {
+		txtNombre.setText("");
+        txtApellido.setText("");
+        fielsueldo.setText("");
+        txtcorreocrear.setText("");
+        passcrearEmple.setText("");	
 	}
 
 	private void cargarRoles(JComboBox rolescombo) {

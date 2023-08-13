@@ -121,4 +121,12 @@ public class GestorLavGui {
 	public empleado crearEmpleado(empleado empleado1) {
 		return gestorLav.crearEmpleado(empleado1);
 	}
+
+	public usuario crearUsuario(usuario usuario1) {
+		return gestorLav.crearUsuario(usuario1);
+	}
+
+	public boolean brorrarEmpleado(int idEmpleado) {
+		return gestorLav.borrarEmpleado(idEmpleado);
+	}
 }
