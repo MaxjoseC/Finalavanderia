@@ -217,6 +217,33 @@ public class Accesodatos {
         }
         return false;
     }
+    /**obtener usuario a partir de su correo.
+     * @param correo correo del usuario.
+     * @return usuario usuario.
+     *
+     */
+    public usuario obtenerUsuario(String correo){
+        usuario usuario1 = null;
+        try{
+            final String SQL = "SELECT * FROM usuario WHERE correo =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setString(1, correo);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                usuario usuario = new usuario();
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setCorreo(correo);
+                usuario.setClave(rs.getString("clave"));
+                usuario.setId_empleado(rs.getInt("id_empleado"));
+                return usuario;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     /** crear nuevo empleado.
      * @param empleado empleado a crear.
      * @return empleado empleado creado.
