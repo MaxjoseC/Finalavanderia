@@ -2,14 +2,10 @@ package view;
 
 import modelos.*;
 import Utilidades.Utilities;
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 public class GestorLavGui {
@@ -154,7 +150,13 @@ public class GestorLavGui {
 	public cliente crearcliente(cliente cliente) {
 		return gestorLav.crearCliente(cliente);
 	}
+
 	public List<cliente> getclientes() {
 		return gestorLav.getClientes();
+	}
+
+	public cliente getClientedatos(String nombre, String apellido) {
+		return gestorLav.getClientedatos(nombre, apellido);
+
 	}
 }

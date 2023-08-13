@@ -28,6 +28,7 @@ public class Clienteframe extends JInternalFrame {
 	private JTable table;
 	JSpinner IDspin;
 	private GestorLavGui gestorLavGui;
+	private boolean clienteEncontado = false;
 
 	/**
 	 * Launch the application.
@@ -137,6 +138,28 @@ public class Clienteframe extends JInternalFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**conseguir un cliente por su nombre y apellido
+				 * return cliente
+				 */
+				String nombre = JOptionPane.showInputDialog(Clienteframe.this, "Ingrese el nombre del cliente").trim();
+                String apellido = JOptionPane.showInputDialog(Clienteframe.this, "Ingrese el apellido del cliente").trim();
+				if (nombre.isEmpty() || apellido.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+				cliente cliente1 = gestorLavGui.getClientedatos(nombre,apellido);
+				if (cliente1!= null){
+					clienteEncontado =true;
+					IDspin.setValue(cliente1.getId_cliente());
+					txtNombrecliente.setText(cliente1.getNombre());
+					txtApellidoCliente.setText(cliente1.getApellido());
+
+                }else{
+					clienteEncontado =false;
+					JOptionPane.showMessageDialog(null, "No se encontró el cliente");
+					limpiar();
+				}
+
 			}
 		});
 		panel.add(btnBuscar);
