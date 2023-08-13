@@ -191,7 +191,7 @@ public class Accesodatos {
                 usuario.setId_usuario(rs.getInt("id_usuario"));
                 usuario.setCorreo(correo);
                 usuario.setClave(clave);
-                usuario.setId_empleado(rs.getInt("id_empleado"));
+                usuario.setId_empleado(rs.getInt("empleado_id_empleado"));
                 return usuario;
             }
 
@@ -235,7 +235,7 @@ public class Accesodatos {
                 usuario.setId_usuario(rs.getInt("id_usuario"));
                 usuario.setCorreo(correo);
                 usuario.setClave(rs.getString("clave"));
-                usuario.setId_empleado(rs.getInt("id_empleado"));
+                usuario.setId_empleado(rs.getInt("empleado_id_empleado"));
                 return usuario;
             }
 

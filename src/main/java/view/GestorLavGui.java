@@ -5,18 +5,20 @@ import modelos.Rol;
 import modelos.empleado;
 import modelos.usuario;
  import Utilidades.Utilities;
-
-import java.awt.EventQueue;
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GestorLavGui {
 
 	private JFrame frmGestorLavanderia;
-	private JMenu Empleadomnu;
+	private JMenu mnuEmpleados;
 	private  GestorLav gestorLav;
 
 	/**
@@ -94,12 +96,18 @@ public class GestorLavGui {
 		});
 		mnNewMenu.add(MnIusuario);
 		mnNewMenu.add(mntmNewMenuItem_1);
-		
-		JMenu Empleadomnu = new JMenu("Empleado");
-		menuBar.add(Empleadomnu);
+
+		mnuEmpleados = new JMenu("Empleados");
+		mnuEmpleados.setMnemonic('E');
+		mnuEmpleados.setEnabled(false);
+		menuBar.add(mnuEmpleados);
 		
 		JMenuItem CrearempleadomenuI = new JMenuItem("Crear");
-		Empleadomnu.add(CrearempleadomenuI);
+		mnuEmpleados.add(CrearempleadomenuI);
+
+	}
+	public void mostrarMenus(boolean estado) {
+		mnuEmpleados.setEnabled(estado);
 	}
 	public usuario iniciarSesion(String correo, String clave) {
 		usuario usuario1 = gestorLav.obtenerUsuariocorreo(correo);
@@ -110,10 +118,6 @@ public class GestorLavGui {
             return null;
         }
 
-	}
-
-	public void mostrarMenus(boolean b) {
-		Empleadomnu.setEnabled(true);
 	}
 
 	public List<Rol> getRoles() {

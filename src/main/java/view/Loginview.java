@@ -50,11 +50,11 @@ public class Loginview extends JInternalFrame {
                 String clave = new String(txtclave.getPassword());
 
 
-				if (Utilities.validarEmail(correo)){
+				if (!Utilities.validarEmail(correo)){
 					JOptionPane.showMessageDialog(Loginview.this, "Correo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				if (Utilities.validarPassword(clave)){
+				if (!Utilities.validarPassword(clave)){
 					JOptionPane.showMessageDialog(Loginview.this, "Contraseña incorrecta, los caracteres no son correctos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 				}
