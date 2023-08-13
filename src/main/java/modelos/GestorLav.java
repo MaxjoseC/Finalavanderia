@@ -70,4 +70,8 @@ public class GestorLav {
     public List<servicio> listarServiciosEmpleado(int id_empleado){
         return accesodatos.listarServiciosEmpleado(id_empleado);
     }
+
+    public usuario obtenerUsuariocorreo(String correo) {
+        return accesodatos.obtenerUsuariocorreo(correo);
+    }
 }

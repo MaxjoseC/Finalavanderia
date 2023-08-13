@@ -2,6 +2,7 @@ package view;
 
 import modelos.GestorLav;
 import modelos.Rol;
+import modelos.empleado;
 import modelos.usuario;
 
 
@@ -111,5 +112,13 @@ public class GestorLavGui {
 
 	public List<Rol> getRoles() {
 		return gestorLav.getRolList();
+	}
+
+	public usuario obtenerUsuariocorreo(String correo) {
+		return gestorLav.obtenerUsuariocorreo(correo);
+	}
+
+	public empleado crearEmpleado(empleado empleado1) {
+		return gestorLav.crearEmpleado(empleado1);
 	}
 }

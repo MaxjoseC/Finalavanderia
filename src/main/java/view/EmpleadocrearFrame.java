@@ -158,14 +158,23 @@ public class EmpleadocrearFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar una contraseña válida. Debe tener al menos un carácter en minúscula, en mayúscula, al menos un número, y debe tener entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+
+				usuario usuario1 = gestorLavGui.obtenerUsuariocorreo(correo);
+				if (usuario1!= null) {
+                    JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Ya existe un usuario con ese correo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
 				empleado empleado1 = new empleado();
 				empleado1.setNombre(nombre);
 				empleado1.setApellido(apellido);
 				empleado1.setSueldo(sueldo1);
 				empleado1.setId_rol(opcionesroles.get(rol));
-				usuario usuario1 = new usuario();
+				usuario1  = new usuario();
 				usuario1.setCorreo(correo);
 				usuario1.setClave(pass);
+
+				empleado1 = gestorLavGui.crearEmpleado(empleado1);
 
 
 			}

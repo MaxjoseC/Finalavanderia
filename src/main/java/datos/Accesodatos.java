@@ -222,7 +222,7 @@ public class Accesodatos {
      * @return usuario usuario.
      *
      */
-    public usuario obtenerUsuario(String correo){
+    public usuario obtenerUsuariocorreo(String correo){
         usuario usuario1 = null;
         try{
             final String SQL = "SELECT * FROM usuario WHERE correo =?";
