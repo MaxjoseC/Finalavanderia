@@ -30,6 +30,8 @@ public class GestorLavGui {
 				try {
 					GestorLavGui window = new GestorLavGui();
 					window.frmGestorLavanderia.setVisible(true);
+					//show maximaxed
+					window.frmGestorLavanderia.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,12 +53,11 @@ public class GestorLavGui {
 	private void initialize() {
 		frmGestorLavanderia = new JFrame();
 		frmGestorLavanderia.setTitle("Gestor Lavanderia");
-		frmGestorLavanderia.setBounds(100, 100, 591, 513);
+		frmGestorLavanderia.setBounds(100, 100, 904, 786);
 		frmGestorLavanderia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestorLavanderia.getContentPane().setLayout(null);
+		frmGestorLavanderia.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(0, 0, 575, 452);
 		frmGestorLavanderia.getContentPane().add(desktopPane);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -104,6 +105,19 @@ public class GestorLavGui {
 		
 		JMenuItem CrearempleadomenuI = new JMenuItem("Crear");
 		mnuEmpleados.add(CrearempleadomenuI);
+		
+		JMenu mnCliente = new JMenu("Cliente");
+		menuBar.add(mnCliente);
+		
+		JMenuItem MnIcliente = new JMenuItem("Lista de clientes");
+		MnIcliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clienteframe clienteframe = new Clienteframe(GestorLavGui.this);
+				desktopPane.add(clienteframe);
+				clienteframe.setVisible(true);
+			}
+		});
+		mnCliente.add(MnIcliente);
 
 	}
 	public void mostrarMenus(boolean estado) {

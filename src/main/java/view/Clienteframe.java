@@ -26,6 +26,7 @@ public class Clienteframe extends JInternalFrame {
 	private JTable tblRegistros;
 	private JTable table;
 	JSpinner IDspin;
+	private GestorLavGui gestorLavGui;
 
 	/**
 	 * Launch the application.
@@ -33,9 +34,13 @@ public class Clienteframe extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Clienteframe() {
+	public Clienteframe(GestorLavGui gestorLavGui) {
+		this.gestorLavGui = gestorLavGui;
+
+
 		setBounds(100, 100, 454, 619);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		setClosable(true);
 
 		JPanel pnDatos = new JPanel();
 		pnDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.BELOW_TOP, null, null));
