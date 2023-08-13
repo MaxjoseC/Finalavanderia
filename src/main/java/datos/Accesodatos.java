@@ -22,11 +22,10 @@ public class Accesodatos {
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Rol rol = new Rol();
                 rol.setId_rol(rs.getInt("id_rol"));
                 rol.setDescripcion(rs.getString("descripcion"));
-                rol.setAcceso(rs.getInt("acceso"));
                 roles.add(rol);
             }
 
@@ -156,7 +155,7 @@ public class Accesodatos {
      */
     public usuario crearUsuario(usuario usuario){
         try{
-            final String SQL = "INSERT INTO usuario (correo, clave, id_empleado) VALUES (?,?,?)";
+            final String SQL = "INSERT INTO usuario (correo, clave, empleado_id_empleado) VALUES (?,?,?)";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getCorreo());
             ps.setString(2, usuario.getClave());
@@ -166,6 +165,7 @@ public class Accesodatos {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 usuario.setId_usuario(rs.getInt(1));
+                return usuario;
             }
         }catch (SQLException e){
             e.printStackTrace(System.out);
@@ -250,7 +250,7 @@ public class Accesodatos {
      */
     public empleado crearEmpleado(empleado empleado){
         try{
-            final String SQL = "INSERT INTO empleado (nombre, apellido,sueldo, id_rol) VALUES (?,?,?,?)";
+            final String SQL = "INSERT INTO empleado (nombre, apellido,sueldo, rol_idrol) VALUES (?,?,?,?)";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, empleado.getNombre());
             ps.setString(2, empleado.getApellido());
@@ -261,6 +261,7 @@ public class Accesodatos {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 empleado.setId_empleado(rs.getInt(1));
+                return empleado;
             }
         }catch (SQLException e){
             e.printStackTrace(System.out);
@@ -303,7 +304,7 @@ public class Accesodatos {
                 empleado.setNombre(rs.getString("nombre"));
                 empleado.setApellido(rs.getString("apellido"));
                 empleado.setSueldo(rs.getDouble("sueldo"));
-                empleado.setId_rol(rs.getInt("id_rol"));
+                empleado.setId_rol(rs.getInt("rol_idrol"));
                 empleados.add(empleado);
             }
 
@@ -319,6 +320,7 @@ public class Accesodatos {
      */
     public boolean borrarEmpleado(int id_empleado){
         try{
+
             final String SQL = "DELETE FROM empleado WHERE id_empleado =?";
             PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
             ps.setInt(1, id_empleado);

@@ -5,25 +5,25 @@ public class empleado {
     private String nombre;
     private String apellido;
     private double sueldo;
-    private int id_rol;
+    private int rol_idrol;
 
 
     public empleado() {
 
     }
-    public empleado(int id_empleado, String nombre, String apellido, double sueldo, int id_rol) {
+    public empleado(int id_empleado, String nombre, String apellido, double sueldo, int rol_idrol) {
         this.id_empleado = id_empleado;
         this.nombre = nombre;
         this.apellido = apellido;
         this.sueldo = sueldo;
-        this.id_rol = id_rol;
+        this.rol_idrol = rol_idrol;
 
     }
-    public empleado(String nombre, String apellido, double sueldo, int id_rol){
+    public empleado(String nombre, String apellido, double sueldo, int rol_idrol){
         this.nombre = nombre;
         this.apellido = apellido;
         this.sueldo = sueldo;
-        this.id_rol = id_rol;
+        this.rol_idrol = rol_idrol;
     }
     public int getId_empleado() {
         return id_empleado;
@@ -50,10 +50,10 @@ public class empleado {
         this.sueldo = sueldo;
     }
     public int getId_rol() {
-        return id_rol;
+        return rol_idrol;
     }
-    public void setId_rol(int id_rol) {
-        this.id_rol = id_rol;
+    public void setId_rol(int rol_idrol) {
+        this.rol_idrol = rol_idrol;
     }
 
 }

@@ -123,7 +123,7 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				String nombre = txtNombre.getText();
                 String apellido = txtApellido.getText();
                 String sueldo = fielsueldo.getText();
-				String rol = (String) Rolescombo.getSelectedItem();
+				String rol = (String) Rolescombo.getSelectedItem().toString();
                 String correo = txtcorreocrear.getText();
                 String pass = new String(passcrearEmple.getPassword());
 				if (nombre.isEmpty()){
@@ -160,7 +160,7 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				}
 
 				usuario usuario1 = gestorLavGui.obtenerUsuariocorreo(correo);
-				if (usuario1!= null) {
+				if (usuario1 != null) {
                     JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Ya existe un usuario con ese correo.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -170,6 +170,7 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				empleado1.setApellido(apellido);
 				empleado1.setSueldo(sueldo1);
 				empleado1.setId_rol(opcionesroles.get(rol));
+
 				usuario1  = new usuario();
 				usuario1.setCorreo(correo);
 				usuario1.setClave(pass);
@@ -177,10 +178,11 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				empleado1 = gestorLavGui.crearEmpleado(empleado1);
 				if (empleado1 == null) {
 					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "No se pudo crear el empleado.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+					return;
 				}
 
                 usuario1.setId_empleado(empleado1.getId_empleado());
+
 				usuario1 = gestorLavGui.crearUsuario(usuario1);
 
 				if (usuario1 == null) {
@@ -205,14 +207,14 @@ public class EmpleadocrearFrame extends JInternalFrame {
         txtApellido.setText("");
         fielsueldo.setText("");
         txtcorreocrear.setText("");
-        passcrearEmple.setText("");	
+        passcrearEmple.setText("");
 	}
 
-	private void cargarRoles(JComboBox rolescombo) {
+	private void cargarRoles(JComboBox Rolescombo) {
 		List<Rol> roles = gestorLavGui.getRoles();
 		opcionesroles = new HashMap<String, Integer>();
-		for(Rol rol : roles) {
-			rolescombo.addItem(rol.getDescripcion());
+		for (Rol rol : roles) {
+			Rolescombo.addItem(rol.getDescripcion());
 			opcionesroles.put(rol.getDescripcion(), rol.getId_rol());
 		}
 	}
