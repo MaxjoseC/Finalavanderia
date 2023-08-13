@@ -4,7 +4,7 @@ import modelos.GestorLav;
 import modelos.Rol;
 import modelos.empleado;
 import modelos.usuario;
-
+ import Utilidades.Utilities;
 
 import java.awt.EventQueue;
 
@@ -102,7 +102,13 @@ public class GestorLavGui {
 		Empleadomnu.add(CrearempleadomenuI);
 	}
 	public usuario iniciarSesion(String correo, String clave) {
-		return gestorLav.iniciarSesion(correo, clave);
+		usuario usuario1 = gestorLav.obtenerUsuariocorreo(correo);
+		boolean resultadoValidacion = Utilities.comprobarclave(usuario1.getClave(),clave);
+		if(resultadoValidacion){
+            return usuario1;
+        }else{
+            return null;
+        }
 
 	}
 

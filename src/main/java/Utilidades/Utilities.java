@@ -12,4 +12,7 @@ public class Utilities {
     }
 
 
+    public static boolean comprobarclave(String clave, String clave1) {
+        return clave.equals(clave1);
+    }
 }
