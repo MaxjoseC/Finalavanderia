@@ -12,6 +12,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import modelos.cliente;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -168,6 +170,31 @@ public class Clienteframe extends JInternalFrame {
 		panel.add(btneditar);
 
 		JButton btnEliminar = new JButton("Èliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!clienteEncontado) {
+					JOptionPane.showMessageDialog(null, "Debe buscar un cliente primero", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				int clienteId = (int) IDspin.getValue();
+
+				int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el cliente?", "Confirmación", JOptionPane.YES_NO_OPTION);
+				if (opcion == JOptionPane.YES_OPTION) {
+					if (gestorLavGui.borraCliente(txtNombrecliente.getText(),txtApellidoCliente.getText())) {
+						JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+						limpiar();
+						clienteEncontado = false;
+						IDspin.setEnabled(true);
+						IDspin.setValue(0);
+						IDspin.repaint();
+
+					} else {
+						JOptionPane.showMessageDialog(null, "No se pudo eliminar el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
 		panel.add(btnEliminar);
 
 		JPanel pnlRegistros = new JPanel();
@@ -196,7 +223,24 @@ public class Clienteframe extends JInternalFrame {
 			}
 		});
 		scrollPane.setViewportView(table);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRow() != -1) {
+					int clienteId = (int) table.getValueAt(table.getSelectedRow(), 0);
+					cliente cliente = gestorLavGui.getCliente_id(clienteId);
 
+					if (cliente != null) {
+						clienteEncontado = true;
+
+						IDspin.setValue(cliente.getId_cliente());
+						IDspin.setEnabled(false);
+						txtNombrecliente.setText(cliente.getNombre());
+						txtApellidoCliente.setText(cliente.getApellido());
+					}
+				}
+			}
+		});
 		cargarregistroscliente();
 	}
 

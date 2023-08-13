@@ -159,4 +159,12 @@ public class GestorLavGui {
 		return gestorLav.getClientedatos(nombre, apellido);
 
 	}
+
+	public cliente getCliente_id(int Id_cliente) {
+		return gestorLav.getCliente_id(Id_cliente);
+
+	}
+	public boolean borraCliente(String nombre, String apellido){
+		return gestorLav.borrarCliente(nombre, apellido);
+	}
 }
