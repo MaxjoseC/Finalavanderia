@@ -57,7 +57,7 @@ public class Accesodatos {
     public cliente crearcliente(cliente cliente){
         try{
             final String SQL = "INSERT INTO cliente (id_cliente, nombre, apellido) VALUES (?,?,?)";
-            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, cliente.getId_cliente());
             ps.setString(2, cliente.getNombre());
             ps.setString(3, cliente.getApellido());
@@ -66,6 +66,7 @@ public class Accesodatos {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 cliente.setId_cliente(rs.getInt(1));
+                return cliente;
             }
         }catch (SQLException e){
             e.printStackTrace(System.out);
@@ -114,6 +115,30 @@ public class Accesodatos {
             e.printStackTrace(System.out);
         }
         return null;
+    }
+
+    /**obtiene todos los clientes.
+     * List<cliente> List of clientes.@return
+     */
+    public List<cliente> getClientes(){
+        List<cliente> clientes = new ArrayList<cliente>();
+        try{
+            final String SQL = "SELECT * FROM cliente";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                cliente cliente = new cliente();
+                cliente.setId_cliente(rs.getInt("id_cliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                clientes.add(cliente);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        return clientes;
     }
 
     public boolean actualizarCliente(cliente cliente){
@@ -422,6 +447,7 @@ public class Accesodatos {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 servicio.setId_servicio(rs.getInt(1));
+                return servicio;
             }
         }catch (SQLException e){
             e.printStackTrace(System.out);

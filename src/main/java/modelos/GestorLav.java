@@ -74,4 +74,8 @@ public class GestorLav {
     public usuario obtenerUsuariocorreo(String correo) {
         return accesodatos.obtenerUsuariocorreo(correo);
     }
+
+    public List<cliente> getClientes() {
+        return accesodatos.getClientes();
+    }
 }

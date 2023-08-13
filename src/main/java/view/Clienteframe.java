@@ -107,21 +107,38 @@ public class Clienteframe extends JInternalFrame {
 				String nombre = txtNombrecliente.getText().trim();
 				String apellido = txtApellidoCliente.getText().trim();
 
-				cliente cliente1 = new cliente(nombre, apellido);
+				cliente cliente1 = new cliente();
 				cliente1.setNombre(nombre);
 				cliente1.setApellido(apellido);
-
-				gestorLavGui.crearcliente(cliente1);
-				if (gestorLavGui.crearcliente(cliente1) != null){
-					JOptionPane.showMessageDialog(null, "Cliente guardado");
-                    limpiar();
+				if (nombre.isEmpty() || apellido.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
+					return;
 				}
+				if (gestorLavGui.crearcliente(cliente1) != null){
+					JOptionPane.showMessageDialog(null, "El cliente se creó correctamente");
+                    limpiar();
+					agregarregistroclientetabla(cliente1);
+				}else{
+					JOptionPane.showMessageDialog(null, "Error al crear el cliente", "Error", JOptionPane.WARNING_MESSAGE);
+					limpiar();
+
+				}
+			}
+
+			private void agregarregistroclientetabla(cliente cliente1) {
+				DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+
+				modelo.addRow(new Object[]{cliente1.getId_cliente(),cliente1.getNombre(),cliente1.getApellido()});
 
 			}
 		});
 		panel.add(btnGuardar);
 
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		panel.add(btnBuscar);
 
 		JButton btneditar = new JButton("Editar\r\n");
@@ -157,6 +174,17 @@ public class Clienteframe extends JInternalFrame {
 		});
 		scrollPane.setViewportView(table);
 
+		cargarregistroscliente();
+	}
+
+	private void cargarregistroscliente() {
+		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+		modelo.setRowCount(0);
+
+		for (cliente cliente1 : gestorLavGui.getclientes()) {
+			modelo.addRow(new Object[]{cliente1.getId_cliente(),cliente1.getNombre(),cliente1.getApellido()});
+
+		}
 	}
 
 	private void limpiar() {

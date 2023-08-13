@@ -151,8 +151,10 @@ public class GestorLavGui {
 		return gestorLav.borrarEmpleado(idEmpleado);
 	}
 
-	public cliente crearcliente(cliente cliente1) {
-		return gestorLav.crearCliente(cliente1);
+	public cliente crearcliente(cliente cliente) {
+		return gestorLav.crearCliente(cliente);
 	}
-
+	public List<cliente> getclientes() {
+		return gestorLav.getClientes();
+	}
 }
