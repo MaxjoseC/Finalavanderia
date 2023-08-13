@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.cliente;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -105,6 +106,17 @@ public class Clienteframe extends JInternalFrame {
 				//guardar los campos en la tabla cliente
 				String nombre = txtNombrecliente.getText().trim();
 				String apellido = txtApellidoCliente.getText().trim();
+
+				cliente cliente1 = new cliente(nombre, apellido);
+				cliente1.setNombre(nombre);
+				cliente1.setApellido(apellido);
+
+				gestorLavGui.crearcliente(cliente1);
+				if (gestorLavGui.crearcliente(cliente1) != null){
+					JOptionPane.showMessageDialog(null, "Cliente guardado");
+                    limpiar();
+				}
+
 			}
 		});
 		panel.add(btnGuardar);

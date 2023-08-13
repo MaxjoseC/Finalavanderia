@@ -1,10 +1,7 @@
 package view;
 
-import modelos.GestorLav;
-import modelos.Rol;
-import modelos.empleado;
-import modelos.usuario;
- import Utilidades.Utilities;
+import modelos.*;
+import Utilidades.Utilities;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -153,4 +150,9 @@ public class GestorLavGui {
 	public boolean brorrarEmpleado(int idEmpleado) {
 		return gestorLav.borrarEmpleado(idEmpleado);
 	}
+
+	public cliente crearcliente(cliente cliente1) {
+		return gestorLav.crearCliente(cliente1);
+	}
+
 }
