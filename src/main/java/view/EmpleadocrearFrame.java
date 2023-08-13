@@ -10,10 +10,14 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Rol;
+import modelos.empleado;
+import modelos.usuario;
 import org.apache.commons.validator.routines.IntegerValidator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmpleadocrearFrame extends JInternalFrame {
 
@@ -27,6 +31,8 @@ public class EmpleadocrearFrame extends JInternalFrame {
 	private final JTextField txtcorreocrear;
 	private final JPasswordField passcrearEmple;
 	GestorLavGui gestorLavGui;
+
+	private Map<String, Integer> opcionesroles;
 
 	/**
 	 * Launch the application.
@@ -152,7 +158,14 @@ public class EmpleadocrearFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar una contraseña válida. Debe tener al menos un carácter en minúscula, en mayúscula, al menos un número, y debe tener entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				usuario usuario = gestorLavGui.obtener
+				empleado empleado1 = new empleado();
+				empleado1.setNombre(nombre);
+				empleado1.setApellido(apellido);
+				empleado1.setSueldo(sueldo1);
+				empleado1.setId_rol(opcionesroles.get(rol));
+				usuario usuario1 = new usuario();
+				usuario1.setCorreo(correo);
+				usuario1.setClave(pass);
 
 
 			}
@@ -164,8 +177,10 @@ public class EmpleadocrearFrame extends JInternalFrame {
 
 	private void cargarRoles(JComboBox rolescombo) {
 		List<Rol> roles = gestorLavGui.getRoles();
+		opcionesroles = new HashMap<String, Integer>();
 		for(Rol rol : roles) {
 			rolescombo.addItem(rol.getDescripcion());
+			opcionesroles.put(rol.getDescripcion(), rol.getId_rol());
 		}
 	}
 
