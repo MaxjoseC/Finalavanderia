@@ -1,20 +1,16 @@
 package view;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import Utilidades.Utilities;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Rol;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
+import org.apache.commons.validator.routines.IntegerValidator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -25,11 +21,11 @@ public class EmpleadocrearFrame extends JInternalFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtNombre;
-	private JTextField txtApellido;
-	private JTextField fielsueldo;
-	private JTextField txtcorreocrear;
-	private JPasswordField passcrearEmple;
+	private final JTextField txtNombre;
+	private final JTextField txtApellido;
+	private final JTextField fielsueldo;
+	private final JTextField txtcorreocrear;
+	private final JPasswordField passcrearEmple;
 	GestorLavGui gestorLavGui;
 
 	/**
@@ -124,6 +120,40 @@ public class EmpleadocrearFrame extends JInternalFrame {
 				String rol = (String) Rolescombo.getSelectedItem();
                 String correo = txtcorreocrear.getText();
                 String pass = new String(passcrearEmple.getPassword());
+				if (nombre.isEmpty()){
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar nombres.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if (apellido.isEmpty()) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar apellidos.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if (sueldo.isEmpty()) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar sueldo.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				IntegerValidator integerValidator = new IntegerValidator();
+				if (!integerValidator.isValid(sueldo)) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar un sueldo válido. Debe ser un valor numérico.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int sueldo1 = Integer.parseInt(sueldo);
+
+				if (sueldo1 <= 0) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar un sueldo válido. Debe ser un valor numérico mayor a cero.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if (!Utilities.validarEmail(correo)) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar un correo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (!Utilities.validarPassword(pass)) {
+					JOptionPane.showMessageDialog(EmpleadocrearFrame.this, "Debe ingresar una contraseña válida. Debe tener al menos un carácter en minúscula, en mayúscula, al menos un número, y debe tener entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				usuario usuario = gestorLavGui.obtener
+
 
 			}
 		});
