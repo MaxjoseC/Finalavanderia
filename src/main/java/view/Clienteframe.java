@@ -188,6 +188,7 @@ public class Clienteframe extends JInternalFrame {
 						IDspin.setEnabled(true);
 						IDspin.setValue(0);
 						IDspin.repaint();
+						cargarregistroscliente();
 
 					} else {
 						JOptionPane.showMessageDialog(null, "No se pudo eliminar el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
