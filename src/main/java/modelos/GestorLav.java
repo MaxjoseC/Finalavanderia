@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GestorLav {
     private Accesodatos accesodatos ;
-
+    private empleado empleadoactual;
     public GestorLav(){
         accesodatos = new Accesodatos();
     }
@@ -77,5 +77,13 @@ public class GestorLav {
 
     public List<cliente> getClientes() {
         return accesodatos.getClientes();
+    }
+
+    public empleado getEmpleadoactual() {
+        return empleadoactual;
+    }
+
+    public void setEmpleadoactual(empleado empleadoactual) {
+        this.empleadoactual = empleadoactual;
     }
 }

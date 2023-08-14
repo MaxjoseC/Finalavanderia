@@ -2,26 +2,21 @@ package view;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
-import javax.swing.JSpinner;
+
+import modelos.cliente;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtservicioID;
@@ -102,6 +97,22 @@ public class ServicioFrame extends JInternalFrame {
 		JButton btnnuevoS = new JButton("Nuevo");
 		btnnuevoS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String servicioid = txtatencionID.getText();
+				String descripcion = txtDescripcionS.getText();
+				int clienteid = ((cliente) cmbClienteS.getSelectedItem()).getId_cliente();
+				if(!servicioid.isEmpty() || !descripcion.isEmpty()){
+					//dialogo de confirmacion
+					int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea iniciar un nuevo servicio?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                    if(confirmacion == JOptionPane.YES_OPTION){
+                       limpiarcamposServicios();
+                    }
+					return;
+				}
+			}
+
+			private void limpiarcamposServicios() {
+				txtservicioID.setText("");
+                txtDescripcionS.setText("");
 			}
 		});
 		pnlSacciones.add(btnnuevoS);
@@ -222,7 +233,7 @@ public class ServicioFrame extends JInternalFrame {
 		
 		JButton btnAtenAgregar = new JButton("Agregar");
 		btnAtenAgregar.addActionListener(e -> {
-			
+
         });
 		pndatosA.add(btnAtenAgregar, "14, 10");
 		
