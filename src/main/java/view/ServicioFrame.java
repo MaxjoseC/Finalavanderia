@@ -118,10 +118,14 @@ public class ServicioFrame extends JInternalFrame {
 					int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea iniciar un nuevo servicio?", "Confirmacion", JOptionPane.YES_NO_OPTION);
 					if (confirmacion == JOptionPane.YES_OPTION) {
 						limpiarcamposServicios();
+						limpiarCamposAtencion();
+						desHabilitarCamposAtencion();
 					}
 					return;
 				}else{
 					limpiarcamposServicios();
+					limpiarCamposAtencion();
+					desHabilitarCamposAtencion();
 				}
 			}
 
@@ -369,8 +373,26 @@ public class ServicioFrame extends JInternalFrame {
             });
 		}
     }
-    /**carga los registros por un id de atencion dado
-     * @param id_atencion id del atencion
+	/**
+	 * deshabilitar campos de atenciones.
+	 */
+	private void desHabilitarCamposAtencion() {
+        txtatencionID.setEditable(false);
+        spinner.setEnabled(false);
+        txtPrecio.setEditable(false);
+        cmbTipoAten.setEnabled(false);
+    }
+    /**
+     * habilitar campos de atenciones.
+     */
+    private void habilitarCamposAtencion() {
+        txtatencionID.setEditable(true);
+        spinner.setEnabled(true);
+        txtPrecio.setEditable(true);
+        cmbTipoAten.setEnabled(true);
+    }
+    /**
+     * deshabilitar campos de registro.
      */
 
 
