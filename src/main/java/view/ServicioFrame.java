@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import java.util.List;
 
+import modelos.Tipoatencion;
+import modelos.atencion;
 import modelos.cliente;
 import modelos.empleado;
 import view.combobox.ClientesComboBoxModel;
@@ -344,7 +346,32 @@ public class ServicioFrame extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
     }
-  
+	/**carga las atenciones por un id de servicio dado
+	 * @param id_servicio id del servicio
+	 */
+	private void cargarAtenciones(int id_servicio) {
+        List<atencion> atenciones = gestorLavGui.obtenerAtenciones(id_servicio);
+
+        atencion[] atencionesArray = new atencion[atenciones.size()];
+        atenciones.toArray(atencionesArray);
+
+        DefaultTableModel model =  (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		List<Tipoatencion> tiposatencion = gestorLavGui.getTipoatencionList();
+		for (atencion atencion : atenciones){
+			model.addRow(new Object[]{
+                    atencion.getId_atencion(),
+                    atencion.getCantidad(),
+                    atencion.getPrecio(),
+                    atencion.getId_Tipoatencion(),
+                    atencion.getId_servicio(),
+					tiposatencion.stream().filter(tipoatencion -> tipoatencion.getId_tipoatencion() == atencion.getId_atencion()).findFirst().get().getNombre()
+            });
+		}
+    }
+    /**carga los registros por un id de atencion dado
+     * @param id_atencion id del atencion
+     */
 
 
 

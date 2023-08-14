@@ -198,4 +198,12 @@ public class GestorLavGui {
 	public empleado getEmpleado() {
 		return gestorLav.getEmpleadoactual();
 	}
+
+	public List<atencion> obtenerAtenciones(int idServicio) {
+		return gestorLav.listaratencion(idServicio);
+	}
+
+	public List<Tipoatencion> getTipoatencionList() {
+		return gestorLav.getTipoatencionList();
+	}
 }
