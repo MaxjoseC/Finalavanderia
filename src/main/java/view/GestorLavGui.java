@@ -185,4 +185,17 @@ public class GestorLavGui {
 	public boolean borraCliente(String nombre, String apellido){
 		return gestorLav.borrarCliente(nombre, apellido);
 	}
+	public empleado obtenerEmpleadoActual(){
+		return gestorLav.getEmpleadoactual();
+	}
+	public static void setEmpleadoactual(empleado empleadoactual){
+        GestorLavGui.setEmpleadoactual(empleadoactual);
+    }
+	public List<empleado> obtenerempleados(){
+		return gestorLav.getempleados();
+	}
+
+	public empleado getEmpleado() {
+		return gestorLav.getEmpleadoactual();
+	}
 }
