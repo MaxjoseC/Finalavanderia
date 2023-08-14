@@ -293,6 +293,29 @@ public class Accesodatos {
         }
         return null;
     }
+
+    public empleado obtenerEmpleadoporid(int id_empleado){
+        try{
+            final String SQL = "SELECT * FROM empleado WHERE id_empleado =?";
+            PreparedStatement ps = conexion.getConnection().prepareStatement(SQL);
+            ps.setInt(1, id_empleado);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                empleado empleado = new empleado();
+                empleado.setId_empleado(rs.getInt("id_empleado"));
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
+                empleado.setSueldo(rs.getDouble("sueldo"));
+                empleado.setId_rol(rs.getInt("rol_idrol"));
+                return empleado;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }return null;
+
+    }
+
     /**
      * modifica un empleado.
      * @param empleado empleado a modificar.

@@ -86,4 +86,8 @@ public class GestorLav {
     public void setEmpleadoactual(empleado empleadoactual) {
         this.empleadoactual = empleadoactual;
     }
+
+    public empleado obtenerEmpleadoporid(int id_empleado) {
+        return accesodatos.obtenerEmpleadoporid(id_empleado);
+    }
 }

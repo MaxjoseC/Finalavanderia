@@ -12,7 +12,7 @@ public class GestorLavGui {
 
 	private JFrame frmGestorLavanderia;
 	private JMenu mnuEmpleados;
-	private  GestorLav gestorLav;
+	private GestorLav gestorLav;
 
 	/**
 	 * Launch the application.
@@ -49,16 +49,16 @@ public class GestorLavGui {
 		frmGestorLavanderia.setBounds(100, 100, 904, 786);
 		frmGestorLavanderia.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestorLavanderia.getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		JDesktopPane desktopPane = new JDesktopPane();
 		frmGestorLavanderia.getContentPane().add(desktopPane);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmGestorLavanderia.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("Cuenta");
 		menuBar.add(mnNewMenu);
-		
+
 		JMenuItem mntmNewMenuItem = new JMenuItem("Iniciar Sesion");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,18 +68,18 @@ public class GestorLavGui {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
-		
+
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Cerrar programa");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dialogo de confirmación para salir
 				int respuesta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que quieres salir?", "Salir", JOptionPane.YES_NO_OPTION);
-                if(respuesta == JOptionPane.YES_OPTION){
-                    System.exit(0);
-                }
+				if (respuesta == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
 			}
 		});
-		
+
 		JMenuItem MnIusuario = new JMenuItem("Crear nuevo empleado");
 		MnIusuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,13 +95,13 @@ public class GestorLavGui {
 		mnuEmpleados.setMnemonic('E');
 		mnuEmpleados.setEnabled(false);
 		menuBar.add(mnuEmpleados);
-		
+
 		JMenuItem CrearempleadomenuI = new JMenuItem("Crear");
 		mnuEmpleados.add(CrearempleadomenuI);
-		
+
 		JMenu mnCliente = new JMenu("Cliente");
 		menuBar.add(mnCliente);
-		
+
 		JMenuItem MnIcliente = new JMenuItem("Lista de clientes");
 		MnIcliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,19 +113,23 @@ public class GestorLavGui {
 		mnCliente.add(MnIcliente);
 
 	}
+
 	public void mostrarMenus(boolean estado) {
 		mnuEmpleados.setEnabled(estado);
 	}
+
 	public usuario iniciarSesion(String correo, String clave) {
 		usuario usuario1 = gestorLav.obtenerUsuariocorreo(correo);
-		boolean resultadoValidacion = Utilities.comprobarclave(usuario1.getClave(),clave);
-		if(resultadoValidacion){
-            return usuario1;
-        }else{
-            return null;
-        }
-
+		boolean resultadoValidacion = Utilities.comprobarclave(usuario1.getClave(), clave);
+		if (resultadoValidacion) {
+			empleado empleado1 = gestorLav.obtenerEmpleadoporid(usuario1.getId_empleado());
+			gestorLav.setEmpleadoactual(empleado1);
+			return usuario1;
+		} else {
+			return null;
+		}
 	}
+
 
 	public List<Rol> getRoles() {
 		return gestorLav.getRolList();
