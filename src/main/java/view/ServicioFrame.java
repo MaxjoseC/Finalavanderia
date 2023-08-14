@@ -25,12 +25,14 @@ public class ServicioFrame extends JInternalFrame {
 	private JTextField txtatencionID;
 	private JTextField txtPrecio;
 	private JTable table;
+	private GestorLavGui gestorLavGui;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public ServicioFrame() {
+	public ServicioFrame(GestorLavGui gestorLavGui) {
+		this.gestorLavGui = gestorLavGui;
 		setTitle("Servicios");
 		setClosable(true);
 		setBounds(100, 100, 841, 654);

@@ -111,6 +111,20 @@ public class GestorLavGui {
 			}
 		});
 		mnCliente.add(MnIcliente);
+		
+		JMenu mnGestiones = new JMenu("Gestiones");
+		menuBar.add(mnGestiones);
+		
+		JMenuItem mntmservicios = new JMenuItem("Servicios");
+		mntmservicios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ServicioFrame serviciosFrame = new ServicioFrame(GestorLavGui.this);
+                desktopPane.add(serviciosFrame);
+                serviciosFrame.setVisible(true);
+				
+			}
+		});
+		mnGestiones.add(mntmservicios);
 
 	}
 
