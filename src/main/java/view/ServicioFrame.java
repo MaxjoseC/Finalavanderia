@@ -32,6 +32,8 @@ public class ServicioFrame extends JInternalFrame {
 	private EmpleadosComboBoxModel empleadoComboBoxModel;
 	private JComboBox cmbClienteS;
 	private JComboBox cmbEmpleadoS;
+	private JSpinner spinner;
+	private JComboBox cmbTipoAten;
 
 
 	/**
@@ -308,6 +310,42 @@ public class ServicioFrame extends JInternalFrame {
 		cmbEmpleadoS.setModel(empleadoComboBoxModel);
 		cmbEmpleadoS.setSelectedIndex(empleadoComboBoxModel.getIndexOf(empleadoActual.getId_empleado()));
 	}
+	/**
+	 * limpiar los campos de atencion
+	 *
+	 */
+	private void limpiarCamposAtencion() {
+        txtatencionID.setText("");
+        spinner.setValue(0);
+        txtPrecio.setText("");
+        cmbTipoAten.setSelectedIndex(0);
+    }
+	/**limpiar la tabla de atenciones;
+	 *
+	 */
+	private void limpiarTablaAtenciones() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+    }
+    /**
+     * limpiar los campos de registro
+     *
+     */
+    private void limpiarCamposRegistro() {
+        txtatencionID.setText("");
+        spinner.setValue(0);
+        txtPrecio.setText("");
+        cmbTipoAten.setSelectedIndex(0);
+    }
+    /**limpiar la tabla de registros;
+     *
+     */
+    private void limpiarTablaRegistro() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+    }
+  
+
 
 
 }
