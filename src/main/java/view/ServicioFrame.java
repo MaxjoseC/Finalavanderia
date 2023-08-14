@@ -13,10 +13,18 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtservicioID;
 	private JTextField txtDescripcionS;
+	private JTable tableS;
 
 
 	/**
@@ -25,7 +33,7 @@ public class ServicioFrame extends JInternalFrame {
 	public ServicioFrame() {
 		setTitle("Servicios");
 		setClosable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 700);
 		
 		JPanel Pnelservicios = new JPanel();
 		Pnelservicios.setBorder(new TitledBorder(null, "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -82,8 +90,66 @@ public class ServicioFrame extends JInternalFrame {
 		JComboBox cmbClienteS = new JComboBox();
 		pnelDatos.add(cmbClienteS, "10, 8, fill, default");
 		
+		JPanel pnlSacciones = new JPanel();
+		Pnelservicios.add(pnlSacciones, BorderLayout.CENTER);
+		pnlSacciones.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JButton btnnuevoS = new JButton("Nuevo");
+		btnnuevoS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		pnlSacciones.add(btnnuevoS);
+		
+		JButton btnguardarservicio = new JButton("Guardar");
+		pnlSacciones.add(btnguardarservicio);
+		
+		JButton btnNuevo = new JButton("Actualizar");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		pnlSacciones.add(btnNuevo);
+		
+		JButton btnBuscarS = new JButton("Buscar");
+		btnBuscarS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		pnlSacciones.add(btnBuscarS);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		pnlSacciones.add(btnBorrar);
+		
+		JPanel pnRegistro = new JPanel();
+		pnRegistro.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		Pnelservicios.add(pnRegistro, BorderLayout.SOUTH);
+		pnRegistro.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPnServicioR = new JScrollPane();
+		pnRegistro.add(scrollPnServicioR, BorderLayout.CENTER);
+		
+		tableS = new JTable();
+		tableS.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Descripci\u00F3n", "Empleado", "Cliente"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		scrollPnServicioR.setViewportView(tableS);
+		
 		JPanel panel = new JPanel();
-		Pnelservicios.add(panel, BorderLayout.CENTER);
+		panel.setBorder(new TitledBorder(null, "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnRegistro.add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new BorderLayout(0, 0));
 
 	}
 
